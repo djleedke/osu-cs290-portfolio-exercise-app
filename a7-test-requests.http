@@ -117,22 +117,22 @@ GET http://localhost:3000/exercises HTTP/1.1
 ###     previous retrieve request. It would be more convenitent to replace
 ###     all occurrences of the ID value in the file, since later tests
 ###     also use the ID for Deadlift with date 01-25-22
-PUT http://localhost:3000/exercises/6281b322c7c796ea344f05ee HTTP/1.1
+PUT http://localhost:3000/exercises/62e9ce99bb0aea66657b9de7 HTTP/1.1
 content-type: application/json
 
 {
     "name": "Deadlift",
-    "reps": 12,
-    "weight": 30,
+    "reps": 13,
+    "weight": 10,
     "unit": "lbs",
-    "date": "01-25-22"
+    "date": "02-13-22"
 }
 
 ### Request 12: Verify that the previous update set reps to 12 and unit
 ###     to lbs (weight remains 30)
 ### NOTE: Change the value of ID in the following URL to the ID assigned
 ###     to Deadlift with date 01-25-22.
-GET http://localhost:3000/exercises/6281b322c7c796ea344f05ee HTTP/1.1
+GET http://localhost:3000/exercises/62e6ec14e670a0ae345346e0 HTTP/1.1
 
 
 ### Request 13: Update with missing property. 400 status code
@@ -179,13 +179,13 @@ content-type: application/json
 }
 
 ### Request 16: Update for non-existent ID. 404 status code
-PUT  http://localhost:3000/exercises/6281146f945176f317005603 HTTP/1.1
+PUT  http://localhost:3000/exercises/62e9ce99bb0aea61657b9de7 HTTP/1.1
 content-type: application/json
 
 {
     "name": "Deadlift",
-    "reps": 12,
-    "weight": 30,
+    "reps": 14,
+    "weight": 126,
     "unit": "lbs",
     "date": "06-25-21"
 }

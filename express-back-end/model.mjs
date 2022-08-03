@@ -42,12 +42,12 @@ function validateExercise(exercise) {
     }
     
     // Reps validation, must be an integer, cannot be less than 0 or more than 10
-    if(!Number.isInteger(exercise.reps) || exercise.reps < 0){
+    if(!Number.isInteger(exercise.reps) || exercise.reps <= 0){
         return false;
     }
 
     // Reps validation, must be an integer, cannot be less than 0 or more than 10
-    if(!Number.isInteger(exercise.weight) || exercise.weight < 0) {
+    if(!Number.isInteger(exercise.weight) || exercise.weight <= 0) {
         return false;
     }
 
@@ -70,18 +70,23 @@ function validateExercise(exercise) {
         }
     }
 
+    if(exercise.date == undefined) {
+        return false;
+    }
+
     return true;
 
 }
 
 /**
+ * Creates an exercise entry in the database.
  * 
  * @param {string} name The name of the exercise
  * @param {integer} reps The number of reps, must be an integer greater than 0
  * @param {integer} weight The weight, must be an integer greater than 0
  * @param {string} unit The unit of measure, must be 'kgs', 'lbs', or 'miles'
  * @param {date} date The date the exercise took place
- * @returns 
+ * @returns The created exercise object from MongoDB or undefined if validation fails.
  */
 const createExercise = async (name, reps, weight, unit, date) => {
     
@@ -100,6 +105,49 @@ const createExercise = async (name, reps, weight, unit, date) => {
         return undefined;
     }
 
-};
+}
 
-export { createExercise }
+/**
+ * Retrieves a list of all exercise objects from the database.
+ * 
+ * @returns A list of all exercise objects from the database.
+ */
+const retrieveExercises = async () => {
+    const query = Exercise.find();
+    return query.exec();
+}
+
+/**
+ * Retrieves an exercise from the database for the specified id.
+ * 
+ * @param {_id} exerciseId The id of the exercise 
+ * @returns The results of the query.
+ */
+const findById = async (exerciseId) => {
+    const query = Exercise.findById(exerciseId);
+    return query.exec();
+}
+
+/**
+ * Updates the specified exercise with the provided data.
+ * 
+ * @param {*} filter A filter containing the object to be updated.
+ * @param {*} update The updated object.
+ * @returns The updated exercise object, null if validation failed.
+ */
+const updateExercise = async (filter, update) => {
+
+    if(validateExercise(update)){
+        let options = { returnDocument: 'after'}
+        const result = await Exercise.findOneAndUpdate(filter, update, options)
+            .catch(error => {
+                return {Error: 'Invalid Request'};
+            });
+        return result;
+    } else {
+        return {Error: 'Invalid Request'};
+    }
+
+}
+
+export { createExercise, findById, retrieveExercises, updateExercise }
