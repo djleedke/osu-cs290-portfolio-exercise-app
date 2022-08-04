@@ -46,7 +46,7 @@ app.get('/exercises/:id', (req, res) => {
             if (exercise !== null) {
                 res.status(200).json(exercise);
             } else {
-                res.status(404).json({ Error: 'Not found'});
+                res.status(404).json({ Error: 'Not Found'});
             }
         });
 
@@ -77,9 +77,8 @@ app.put('/exercises/:id', (req, res) => {
                 if(req.body.date !== undefined){
                     update.date = req.body.date;
                 }
-            }
-            
-            exercises.updateExercise({ _id: exerciseId }, update)
+
+                exercises.updateExercise({ _id: exerciseId }, update)
                 .then(exercise => {
 
                     if(exercise.Error == undefined && exercise !== null){
@@ -89,7 +88,12 @@ app.put('/exercises/:id', (req, res) => {
                     } else {
                         res.status(404).json({ Error: "Not Found"});
                     }
-                })
+                });
+
+            } else {
+                res.status(404).json({ Error: "Not Found"});
+            }
+            
         })
         .catch(error => {
             res.status(404).json({ Error: "Not Found"})
@@ -98,6 +102,23 @@ app.put('/exercises/:id', (req, res) => {
 });
 
 // 5. DELETE using DELETE /exercises/:id
+app.delete('/exercises/:id', (req, res) => {
+    
+    const exerciseId = req.params.id;
+
+    exercises.deleteById(exerciseId)
+        .then(result => {
+            if(result === 1){
+                res.status(204).send();
+            } else {
+                res.status(404).json({ Error: "Not Found" });
+            }
+        })
+        .catch(error => {
+            res.status(404).json({ Error: "Not Found" })
+        });
+
+});
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);

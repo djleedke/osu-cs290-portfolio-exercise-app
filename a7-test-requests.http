@@ -117,7 +117,7 @@ GET http://localhost:3000/exercises HTTP/1.1
 ###     previous retrieve request. It would be more convenitent to replace
 ###     all occurrences of the ID value in the file, since later tests
 ###     also use the ID for Deadlift with date 01-25-22
-PUT http://localhost:3000/exercises/62e9ce99bb0aea66657b9de7 HTTP/1.1
+PUT http://localhost:3000/exercises/62eb215a7a980d5d0b64dbf4 HTTP/1.1
 content-type: application/json
 
 {
@@ -132,13 +132,13 @@ content-type: application/json
 ###     to lbs (weight remains 30)
 ### NOTE: Change the value of ID in the following URL to the ID assigned
 ###     to Deadlift with date 01-25-22.
-GET http://localhost:3000/exercises/62e6ec14e670a0ae345346e0 HTTP/1.1
+GET http://localhost:3000/exercises/62eb215a7a980d5d0b64dbf4 HTTP/1.1
 
 
 ### Request 13: Update with missing property. 400 status code
 ### NOTE: Change the value of ID in the following URL to the ID assigned
 ###     to Deadlift with date 01-25-22.
-PUT http://localhost:3000/exercises/6281b322c7c796ea344f05ee HTTP/1.1
+PUT http://localhost:3000/exercises/62eb215a7a980d5d0b64dbf4 HTTP/1.1
 content-type: application/json
 
 {
@@ -152,7 +152,7 @@ content-type: application/json
 ### Request 14: Update with invalid property. 400 status code
 ### NOTE: Change the value of ID in the following URL to the ID assigned
 ###     to Deadlift with date 01-25-22.
-PUT http://localhost:3000/exercises/6281b322c7c796ea344f05ee HTTP/1.1
+PUT http://localhost:3000/exercises/62eb215a7a980d5d0b64dbf4 HTTP/1.1
 content-type: application/json
 
 {
@@ -167,7 +167,7 @@ content-type: application/json
 ### Request 15: Update with invalid property. 400 status code
 ### NOTE: Change the value of ID in the following URL to the ID assigned
 ###     to Deadlift with date 01-25-22.
-PUT  http://localhost:3000/exercises/6281b322c7c796ea344f05ee HTTP/1.1
+PUT  http://localhost:3000/exercises/62eb215a7a980d5d0b64dbf4 HTTP/1.1
 content-type: application/json
 
 {
@@ -179,7 +179,7 @@ content-type: application/json
 }
 
 ### Request 16: Update for non-existent ID. 404 status code
-PUT  http://localhost:3000/exercises/62e9ce99bb0aea61657b9de7 HTTP/1.1
+PUT  http://localhost:3000/exercises/62e9ce99bb0aea61657b9de9 HTTP/1.1
 content-type: application/json
 
 {
@@ -198,11 +198,11 @@ GET  http://localhost:3000/exercises/6281146f945176f317005603 HTTP/1.1
 ### NOTE: Change the value of ID in the following URL to the ID assigned
 ###     to Deadlift with date 01-25-22. You can find that ID from the
 ##      previous retrieve request
-DELETE http://localhost:3000/exercises/6281b322c7c796ea344f05ee HTTP/1.1
+DELETE http://localhost:3000/exercises/62eb215a7a980d5d0b64dbf4 HTTP/1.1
 
 
 ### Request 18: Verify that the Deadlift on 01-25-22 has been deleted. 404 status code
-GET http://localhost:3000/exercises/6281b322c7c796ea344f05ee HTTP/1.1
+GET http://localhost:3000/exercises/62eb1ebb00cbe2883e7364fb HTTP/1.1
 
 
 ### Request 19: Verify that the Deadlift on 01-25-22 has been deleted

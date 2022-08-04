@@ -40,7 +40,7 @@ function validateExercise(exercise) {
     if(typeof exercise.name !== "string" || exercise.name == undefined || exercise.name.length == 0) {
         return false;
     }
-    
+
     // Reps validation, must be an integer, cannot be less than 0 or more than 10
     if(!Number.isInteger(exercise.reps) || exercise.reps <= 0){
         return false;
@@ -73,6 +73,7 @@ function validateExercise(exercise) {
     if(exercise.date == undefined) {
         return false;
     }
+
 
     return true;
 
@@ -138,6 +139,7 @@ const findById = async (exerciseId) => {
 const updateExercise = async (filter, update) => {
 
     if(validateExercise(update)){
+
         let options = { returnDocument: 'after'}
         const result = await Exercise.findOneAndUpdate(filter, update, options)
             .catch(error => {
@@ -150,4 +152,15 @@ const updateExercise = async (filter, update) => {
 
 }
 
-export { createExercise, findById, retrieveExercises, updateExercise }
+/**
+ * Deletes the Exercise with the specified id.
+ * 
+ * @param {*} exerciseId The exercise id
+ * @returns The number of objects deleted
+ */
+const deleteById = async (exerciseId) => {
+    const result = await Exercise.deleteOne({_id: exerciseId});
+    return result.deletedCount;
+}
+
+export { createExercise, deleteById, findById, retrieveExercises, updateExercise }
