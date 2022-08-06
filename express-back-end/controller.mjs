@@ -33,7 +33,12 @@ app.post('/exercises', asyncHandler(async(req, res) => {
 app.get('/exercises', asyncHandler(async(req,res) => {
 
     const exercise = await exercises.retrieveExercises();
-    res.status(200).json(exercise);
+
+    if(exercise !== null){
+        res.status(200).json(exercise);
+    } else {
+        res.status(404).json({ Error: "Not Found" });
+    }
 
 }));
 
